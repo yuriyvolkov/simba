@@ -3,7 +3,7 @@ package main
 import (
 	"net"
 
-	"github.com/yuriyvolkov/simba/smb"
+	"github.com/yuriyvolkov/simba/pkg/smb"
 )
 
 // sendErrorResponse sends an error response to an SMB client

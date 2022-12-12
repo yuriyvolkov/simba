@@ -3,7 +3,7 @@ package main
 import (
 	"net"
 
-	"github.com/yuriyvolkov/simba/smb"
+	"github.com/yuriyvolkov/simba/pkg/smb"
 )
 
 // shareMap maps share names to directories on the local filesystem
