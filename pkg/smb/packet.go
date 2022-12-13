@@ -5,9 +5,6 @@ import (
 	"unsafe"
 )
 
-// FlagUnicode indicates that the data in the SMB packet is encoded in Unicode.
-const FlagUnicode uint16 = 0x8000
-
 type Marshaller interface {
 	Marshal() ([]byte, error)
 }
@@ -74,24 +71,24 @@ func ParseData(command Command, data []byte) (Marshaller, error) {
 		return TreeConnectRequestParse(data)
 	case CommandTreeDisconnect:
 		return TreeDisconnectRequestParse(data)
-	// case CommandCreate:
-	// 	return CreateRequestParse(data)
-	// case CommandClose:
-	// 	return CloseRequestParse(data)
-	// case CommandFlush:
-	// 	return FlushRequestParse(data)
-	// case CommandRead:
-	// 	return ReadRequestParse(data)
-	// case CommandWrite:
-	// 	return WriteRequestParse(data)
-	// case CommandDelete:
-	// 	return DeleteRequestParse(data)
-	// case CommandRename:
-	// 	return RenameRequestParse(data)
-	// case CommandQueryInfo:
-	// 	return QueryInfoRequestParse(data)
-	// case CommandSetInfo:
-	// 	return SetInfoRequestParse(data)
+	case CommandCreate:
+		return CreateRequestParse(data)
+	case CommandClose:
+		return CloseRequestParse(data)
+	case CommandFlush:
+		return FlushRequestParse(data)
+	case CommandRead:
+		return ReadRequestParse(data)
+	case CommandWrite:
+		return WriteRequestParse(data)
+	case CommandDelete:
+		return DeleteRequestParse(data)
+	case CommandRename:
+		return RenameRequestParse(data)
+	case CommandQueryInfo:
+		return QueryInfoRequestParse(data)
+	case CommandSetInfo:
+		return SetInfoRequestParse(data)
 	default:
 		return nil, errors.New("invalid command")
 	}

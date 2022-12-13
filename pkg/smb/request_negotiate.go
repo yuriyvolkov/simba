@@ -10,6 +10,24 @@ type NegotiateRequest struct {
 	Dialects Dialects
 }
 
+func (r *NegotiateRequest) Marshal() ([]byte, error) {
+	// Create a new bytes buffer
+	var b bytes.Buffer
+
+	// Write the word count
+	if err := binary.Write(&b, binary.LittleEndian, uint8(len(r.Dialects))); err != nil {
+		return nil, err
+	}
+
+	// Write the dialects
+	if err := binary.Write(&b, binary.LittleEndian, r.Dialects); err != nil {
+		return nil, err
+	}
+
+	// Return the marshaled data
+	return b.Bytes(), nil
+}
+
 // NegotiateRequestParse parses an SMB negotiate request
 func NegotiateRequestParse(data []byte) (*NegotiateRequest, error) {
 	// Create a new bytes reader
